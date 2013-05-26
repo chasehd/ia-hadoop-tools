@@ -87,7 +87,7 @@ public class ZipNumRecordWriter extends RecordWriter<Text, Text>
 
   /**
    * Write the key,value pair to the compressed output stream.  Once we write <code>limit</code>
-   * records, close the comrpression envelope and start another one; also write a summary line.
+   * records, close the compression envelope and start another one; also write a summary line.
    */
   @Override
   public synchronized void write( Text key, Text value ) throws IOException, InterruptedException
@@ -142,7 +142,10 @@ public class ZipNumRecordWriter extends RecordWriter<Text, Text>
       {
         writeSummary();
       }
-    
+
+    summary.flush();
+    summary.close();
+
     out.flush();
     out.close();
   }
@@ -170,8 +173,6 @@ public class ZipNumRecordWriter extends RecordWriter<Text, Text>
     summary.write( SUMMARY_DELIMITER );
     summary.write( Long.toString( out.getPos() - oldPos ).getBytes("UTF-8") );
     summary.write( NEWLINE ); 
-    summary.flush();
-    summary.close();
   }
   
   /**
