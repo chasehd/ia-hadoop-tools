@@ -33,7 +33,7 @@ import org.archive.hadoop.mapreduce.ZipNumOutputFormat;
 
 /**
  * Very simple/minimal StoreFunc to write {key,value} pairs into IA's
- * "zip num" format, using the ZipNumAllOutputFormat class.
+ * "zip num" format, using the ZipNumOutputFormat class.
  */
 public class ZipNumStorage extends StoreFunc
 {
