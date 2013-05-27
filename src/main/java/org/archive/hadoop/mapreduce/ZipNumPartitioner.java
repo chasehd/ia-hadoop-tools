@@ -104,7 +104,6 @@ public class ZipNumPartitioner<K, V> extends Partitioner<K, V> implements Config
 					str = str.substring(0, keyEndIndex);
 				}
 				splitList.add(str);
-				System.out.println(str);
 			}
 			
 			if ((numSplits - 1) != splitList.size()) {
