@@ -87,7 +87,7 @@ public class ZipNumStorage extends StoreFunc
 
         if ( size != 2 )
           {
-            throw new IOException( "Invalid tuple size, must be 1: " + size );
+            throw new IOException( "Invalid tuple size, must be 2: " + size );
           }
         
         if ( DataType.findType( tuple.get(0) ) != DataType.CHARARRAY )
