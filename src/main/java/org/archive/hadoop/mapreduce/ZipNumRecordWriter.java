@@ -52,7 +52,7 @@ import org.apache.hadoop.mapreduce.RecordWriter;
 public class ZipNumRecordWriter extends RecordWriter<Text, Text>
 {
   // Since we are writing binary output, we just create some
-  // <strong>int</strong> values for our literal characters we use
+  // <strong>int</strong> values for the literal characters we use
   // later.
   public static final int DELIMITER = ' ';
   public static final int NEWLINE   = '\n';
