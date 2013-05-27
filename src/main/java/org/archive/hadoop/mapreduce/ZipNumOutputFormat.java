@@ -84,7 +84,6 @@ public class ZipNumOutputFormat extends TextOutputFormat<Text, Text>
     // Obtain the compression codec from the Hadoop environment.
     Class<? extends CompressionCodec> codecClass = getOutputCompressorClass( context, GzipCodec.class );
     CompressionCodec codec = (CompressionCodec) ReflectionUtils.newInstance( codecClass, conf );
-    // System.err.println( "Using codec:" + codec.toString() );
 
     // Use a file extension basd on the codec, don't hard-code it.
     Path mainFile = getWorkFile(context, partitionName + codec.getDefaultExtension() );
