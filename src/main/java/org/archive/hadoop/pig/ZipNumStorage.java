@@ -85,9 +85,9 @@ public class ZipNumStorage extends StoreFunc
       {
         int size = tuple.size();
 
-        if ( size != 1 && size != 2 )
+        if ( size != 2 )
           {
-            throw new IOException( "Invalid tuple size, must be 1 or 2: " + size );
+            throw new IOException( "Invalid tuple size, must be 1: " + size );
           }
         
         if ( DataType.findType( tuple.get(0) ) != DataType.CHARARRAY )
@@ -95,22 +95,13 @@ public class ZipNumStorage extends StoreFunc
             throw new IOException( "Invalid type for tuple 0, not CHARARRAY: " + DataType.findTypeName( DataType.findType( tuple.get(0) ) ) + ":" + tuple.get(0) + ":" + tuple.get(1) );
           }
         
-        if ( size == 2 )
+        if ( DataType.findType( tuple.get(1) ) != DataType.CHARARRAY )
           {
-            if ( DataType.findType( tuple.get(1) ) != DataType.CHARARRAY )
-              {
-                throw new IOException( "Invalid type for tuple 1, not CHARARRAY: " + DataType.findTypeName( DataType.findType( tuple.get(1) ) ) + ":" + tuple.get(0) + ":" + tuple.get(1) );
-              }
-            
-            this.key  .set( (String) tuple.get(0) );
-            this.value.set( (String) tuple.get(1) );
+            throw new IOException( "Invalid type for tuple 1, not CHARARRAY: " + DataType.findTypeName( DataType.findType( tuple.get(1) ) ) + ":" + tuple.get(0) + ":" + tuple.get(1) );
           }
-        else
-          {
-            //String s[] = ((String)tuple.get(0)).split( " ", 2 );           
-            this.key  .set( "" );
-            this.value.set( (String)tuple.get(0) );
-          }
+        
+        this.key  .set( (String) tuple.get(0) );
+        this.value.set( (String) tuple.get(1) );
         
         this.writer.write( this.key, this.value );
       }
