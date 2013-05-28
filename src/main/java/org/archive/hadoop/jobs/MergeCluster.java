@@ -11,7 +11,7 @@ import org.apache.hadoop.mapreduce.lib.input.NLineInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.archive.hadoop.mapreduce.ZipNumAllOutputFormat;
+import org.archive.hadoop.mapreduce.ZipNumOutputFormat;
 import org.archive.hadoop.pig.ZipNumInputFormat;
 import org.archive.hadoop.pig.ZipNumPartitioner;
 
@@ -63,7 +63,7 @@ public class MergeCluster implements Tool {
 		FileOutputFormat.setOutputPath(job, new Path(outputPath));
  
 		job.setInputFormatClass(ZipNumInputFormat.class);
-		job.setOutputFormatClass(ZipNumAllOutputFormat.class);
+		job.setOutputFormatClass(ZipNumOutputFormat.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 		job.setPartitionerClass(ZipNumPartitioner.class);
