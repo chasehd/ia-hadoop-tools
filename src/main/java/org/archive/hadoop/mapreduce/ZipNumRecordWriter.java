@@ -48,7 +48,7 @@ import org.apache.hadoop.mapreduce.RecordWriter;
  * starting byte-offset of the envelope and the envelope size
  * in bytes, e.g.
  * <pre>
- *   org,example)	0	128
+ *   org,example)	part-00000	0	128
  * </pre>
  * The fields of the summary/idx file are delimited with tabs.
  * <p>
