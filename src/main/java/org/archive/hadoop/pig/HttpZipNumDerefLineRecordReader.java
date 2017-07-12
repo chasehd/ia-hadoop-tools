@@ -7,18 +7,19 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
-import org.archive.format.gzip.zipnum.ZipNumCluster;
+import org.archive.format.gzip.zipnum.ZipNumIndex;
 import org.archive.format.gzip.zipnum.ZipNumParams;
 import org.archive.util.iterator.CloseableIterator;
 
 public class HttpZipNumDerefLineRecordReader extends RecordReader<LongWritable, Text> {
 	
-	protected ZipNumCluster cluster;
+	protected ZipNumIndex zipnumIndex;
 	protected ZipNumParams params;
 	
 	protected String clusterUri;
 	
-	protected String start, end;
+	protected String start;
+	protected String end;
 	
 	protected Text nextCdxLine;
 	
@@ -60,8 +61,7 @@ public class HttpZipNumDerefLineRecordReader extends RecordReader<LongWritable, 
 		
 		inner.initialize(split, context);
 		
-		cluster = new ZipNumCluster(clusterUri);
-		cluster.init();
+		zipnumIndex = ZipNumIndex.createIndexWithBasePath(clusterUri);
 		
 		String theUrl = inner.getUrl();
 		
@@ -71,7 +71,7 @@ public class HttpZipNumDerefLineRecordReader extends RecordReader<LongWritable, 
 		
 		HttpClusterInputSplit hcis = (HttpClusterInputSplit)split;
 		
-		cdxReader = cluster.getCDXIterator(new RecordReaderValueIterator(inner), start, end, hcis.getSplit(), hcis.getNumSplits());
+		cdxReader = zipnumIndex.getCDXIterator(new RecordReaderValueIterator(inner), start, end, hcis.getSplit(), hcis.getNumSplits());
 	}
 
 	@Override
